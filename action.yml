@@ -1,5 +1,5 @@
-name: 'Slack Notify Build'
-description: 'Report GitHub Actions build status on Slack'
+name: 'Slack Heroku Build Notify'
+description: 'Report GitHub Actions build status on Slack with Heroku App link'
 branding:
   icon: message-square
   color: orange
