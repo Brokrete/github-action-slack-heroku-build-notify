@@ -25,7 +25,7 @@ describe('Utils', () => {
 
       expect(attachments[0].fields.find(a => a.title === 'Status')).toEqual({
         title: 'Status',
-        value: 'STARTED',
+        value: `<https://github.com/Brokrete/github-action-slack-notify-build/actions/runs/${runId} | STARTED>`,
         short: true,
       });
     });
