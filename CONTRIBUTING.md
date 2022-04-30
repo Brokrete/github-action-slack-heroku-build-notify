@@ -2,7 +2,7 @@
 
 ## Issues and Feature Requests
 
-To report bugs or to request new features, you may [create a new issue](https://github.com/Brokrete/github-action-slack-notify-build/issues) on the repository. Our team will do its best to respond to your request, but we cannot guarantee a response or a solution.
+To report bugs or to request new features, you may [create a new issue](https://github.com/Brokrete/github-action-slack-heroku-build-notify/issues) on the repository. Our team will do its best to respond to your request, but we cannot guarantee a response or a solution.
 
 ## Releasing a New Version
 
