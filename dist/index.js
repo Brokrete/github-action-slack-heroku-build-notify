@@ -1071,7 +1071,7 @@ const { buildSlackAttachments, formatChannelName } = __webpack_require__(543);
     const channel = core.getInput('channel');
     const status = core.getInput('status');
     const color = core.getInput('color');
-    const herokuAppId = core.getInput('heroku_app_id');
+    const herokuAppName = core.getInput('heroku_app_name');
     const messageId = core.getInput('message_id');
     const token = process.env.SLACK_BOT_TOKEN;
     const slack = new WebClient(token);
@@ -1081,7 +1081,7 @@ const { buildSlackAttachments, formatChannelName } = __webpack_require__(543);
       return;
     }
 
-    const attachments = buildSlackAttachments({ status, color, github, herokuAppId });
+    const attachments = buildSlackAttachments({ status, color, github, herokuAppName });
     const channelId = core.getInput('channel_id') || (await lookUpChannelId({ slack, channel }));
 
     if (!channelId) {
@@ -10002,7 +10002,7 @@ module.exports = resolveCommand;
 
 const { context } = __webpack_require__(469);
 
-function buildSlackAttachments({ status, color, github, herokuAppId }) {
+function buildSlackAttachments({ status, color, github, herokuAppName }) {
   const { payload, ref, workflow, eventName } = github.context;
   const { owner, repo } = context.repo;
   const event = eventName;
@@ -10035,7 +10035,7 @@ function buildSlackAttachments({ status, color, github, herokuAppId }) {
         },
         {
           title: 'Heroku App',
-          value: herokuAppId ? `<https://${herokuAppId}.herokuapp.com | ${herokuAppId}>` : '',
+          value: herokuAppName ? `<https://${herokuAppName}.herokuapp.com | ${herokuAppName}>` : '',
           short: true,
         },
         {

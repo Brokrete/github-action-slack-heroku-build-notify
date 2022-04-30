@@ -36,7 +36,7 @@ describe('Utils', () => {
           status: 'STARTED',
           color: 'good',
           github: GITHUB_PUSH_EVENT,
-          herokuAppId: 'heroku-app',
+          herokuAppName: 'heroku-app',
         });
 
         expect(attachments[0].fields.find(a => a.title === 'Heroku App')).toEqual({
@@ -73,7 +73,7 @@ describe('Utils', () => {
           status: 'STARTED',
           color: 'good',
           github: GITHUB_PR_EVENT,
-          herokuAppId: 'heroku-app',
+          herokuAppName: 'heroku-app',
         });
 
         expect(attachments[0].fields.find(a => a.title === 'Heroku App')).toEqual({

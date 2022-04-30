@@ -8,7 +8,7 @@ const { buildSlackAttachments, formatChannelName } = require('./src/utils');
     const channel = core.getInput('channel');
     const status = core.getInput('status');
     const color = core.getInput('color');
-    const herokuAppId = core.getInput('heroku_app_id');
+    const herokuAppName = core.getInput('heroku_app_name');
     const messageId = core.getInput('message_id');
     const token = process.env.SLACK_BOT_TOKEN;
     const slack = new WebClient(token);
@@ -18,7 +18,7 @@ const { buildSlackAttachments, formatChannelName } = require('./src/utils');
       return;
     }
 
-    const attachments = buildSlackAttachments({ status, color, github, herokuAppId });
+    const attachments = buildSlackAttachments({ status, color, github, herokuAppName });
     const channelId = core.getInput('channel_id') || (await lookUpChannelId({ slack, channel }));
 
     if (!channelId) {

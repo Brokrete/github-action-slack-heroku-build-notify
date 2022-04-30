@@ -16,19 +16,13 @@ env:
   SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
 ```
 
-The Slack notification leverages attachments to group important information together and provide valuable links:
+The Slack notification leverages attachments to group important information together and provide valuable links
 
-<img src="docs/push.png" alt="Screenshot of the push event" width="540">
-
-When used with the `pull_request` event, a link to the originating pull request is included:
-
-<img src="docs/pr.png" alt="Screenshot of the pull_request event" width="540">
+When used with the `pull_request` event, a link to the originating pull request is included
 
 ### Updating an Existing Message
 
 If you need to send multiple Slack build updates and you prefer to update a single message instead of posting multiple messages, you can pass a `message_id` to future steps.
-
-<img src="docs/updating_message.gif" alt="Updating existing messages" width="540">
 
 Note: You must assign a step `id` to the first Slack notification step in order to reference it for future steps:
 
@@ -57,6 +51,7 @@ Note: You must assign a step `id` to the first Slack notification step in order 
     channel: app-alerts
     status: SUCCESS
     color: good
+    heroku_app_name: some-app-name
 ```
 
 ### Reporting Success or Failure
@@ -75,6 +70,7 @@ You can use the `success()` and `failure()` conditional checks within your workf
     channel: app-alerts
     status: SUCCESS
     color: good
+    heroku_app_name: some-app-name
 
 - name: Notify slack fail
   if: failure()
@@ -115,9 +111,9 @@ The ID of a previous Slack message to update instead of posting a new message. T
 message_id: ${{ steps.<your_first_slack_step_id>.outputs.message_id }}
 ```
 
-### `heroku_app_id`
+### `heroku_app_name`
 
-The ID of heroku app
+The Heroku App Name
 
 ## Outputs
 
@@ -140,11 +136,12 @@ To use this GitHub Action, you'll need a [Slack bot token](https://api.slack.com
 
 In order to use your Slack App with this GitHub Action, be sure to enable the following OAuth scopes:
 
-| Scope           | Required?                                  |
-| --------------- | ------------------------------------------ |
-| `chat:write`    | Yes                                        |
-| `channels:read` | If using `channel` instead of `channel_id` |
-| `groups:read`   | If using `channel` instead of `channel_id` |
+| Scope               | Required?                                  |
+| ------------------- | ------------------------------------------ |
+| `chat:write`        | Yes                                        |
+| `chat:write.public` | Yes                                        |
+| `channels:read`     | If using `channel` instead of `channel_id` |
+| `groups:read`       | If using `channel` instead of `channel_id` |
 
 ## License
 
