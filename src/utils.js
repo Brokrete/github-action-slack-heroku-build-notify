@@ -1,6 +1,6 @@
 const { context } = require('@actions/github');
 
-function buildSlackAttachments({ status, color, github }) {
+function buildSlackAttachments({ status, color, github, herokuAppId }) {
   const { payload, ref, workflow, eventName } = github.context;
   const { owner, repo } = context.repo;
   const event = eventName;
@@ -32,21 +32,16 @@ function buildSlackAttachments({ status, color, github }) {
           short: true,
         },
         {
-          title: 'Workflow',
-          value: `<https://github.com/${owner}/${repo}/actions/runs/${runId} | ${workflow}>`,
+          title: 'Heroku App',
+          value: `<https://${herokuAppId}.herokuapp.com | ${herokuAppId}>`,
           short: true,
         },
         {
           title: 'Status',
-          value: status,
+          value: `<https://github.com/${owner}/${repo}/actions/runs/${runId} | ${status}>`,
           short: true,
         },
         referenceLink,
-        {
-          title: 'Event',
-          value: event,
-          short: true,
-        },
       ],
       footer_icon: 'https://github.githubassets.com/favicon.ico',
       footer: `<https://github.com/${owner}/${repo} | ${owner}/${repo}>`,
