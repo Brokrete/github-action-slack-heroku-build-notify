@@ -22,9 +22,10 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         uses: ./
         with:
-          channel_id: CB9QT2NNR
+          channel_id: CQDATRSSE
           status: STARTED
           color: warning
+          heroku_app_id: brokrete-web-admin-dev
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
