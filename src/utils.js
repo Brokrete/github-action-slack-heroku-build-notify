@@ -33,7 +33,7 @@ function buildSlackAttachments({ status, color, github, herokuAppId }) {
         },
         {
           title: 'Heroku App',
-          value: `<https://${herokuAppId}.herokuapp.com | ${herokuAppId}>`,
+          value: herokuAppId ? `<https://${herokuAppId}.herokuapp.com | ${herokuAppId}>` : '',
           short: true,
         },
         {

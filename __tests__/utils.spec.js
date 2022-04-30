@@ -25,18 +25,23 @@ describe('Utils', () => {
 
       expect(attachments[0].fields.find(a => a.title === 'Status')).toEqual({
         title: 'Status',
-        value: 'STARTED',
+        value: `<https://github.com/Brokrete/github-action-slack-notify-build/actions/runs/${runId} | STARTED>`,
         short: true,
       });
     });
 
     describe('for push events', () => {
-      it('links to the action workflow', () => {
-        const attachments = buildSlackAttachments({ status: 'STARTED', color: 'good', github: GITHUB_PUSH_EVENT });
+      it('links to the heroku app', () => {
+        const attachments = buildSlackAttachments({
+          status: 'STARTED',
+          color: 'good',
+          github: GITHUB_PUSH_EVENT,
+          herokuAppId: 'heroku-app',
+        });
 
-        expect(attachments[0].fields.find(a => a.title === 'Workflow')).toEqual({
-          title: 'Workflow',
-          value: `<https://github.com/Brokrete/github-action-slack-notify-build/actions/runs/${runId} | CI>`,
+        expect(attachments[0].fields.find(a => a.title === 'Heroku App')).toEqual({
+          title: 'Heroku App',
+          value: `<https://heroku-app.herokuapp.com | heroku-app>`,
           short: true,
         });
       });
@@ -47,16 +52,6 @@ describe('Utils', () => {
         expect(attachments[0].fields.find(a => a.title === 'Repo')).toEqual({
           title: 'Repo',
           value: `<https://github.com/Brokrete/github-action-slack-notify-build | Brokrete/github-action-slack-notify-build>`,
-          short: true,
-        });
-      });
-
-      it('shows the event name', () => {
-        const attachments = buildSlackAttachments({ status: 'STARTED', color: 'good', github: GITHUB_PUSH_EVENT });
-
-        expect(attachments[0].fields.find(a => a.title === 'Event')).toEqual({
-          title: 'Event',
-          value: 'push',
           short: true,
         });
       });
@@ -74,21 +69,16 @@ describe('Utils', () => {
 
     describe('for PR events', () => {
       it('links to the action workflow', () => {
-        const attachments = buildSlackAttachments({ status: 'STARTED', color: 'good', github: GITHUB_PR_EVENT });
-
-        expect(attachments[0].fields.find(a => a.title === 'Workflow')).toEqual({
-          title: 'Workflow',
-          value: `<https://github.com/Brokrete/github-action-slack-notify-build/actions/runs/${runId} | CI>`,
-          short: true,
+        const attachments = buildSlackAttachments({
+          status: 'STARTED',
+          color: 'good',
+          github: GITHUB_PR_EVENT,
+          herokuAppId: 'heroku-app',
         });
-      });
 
-      it('shows the event name', () => {
-        const attachments = buildSlackAttachments({ status: 'STARTED', color: 'good', github: GITHUB_PR_EVENT });
-
-        expect(attachments[0].fields.find(a => a.title === 'Event')).toEqual({
-          title: 'Event',
-          value: 'pull_request',
+        expect(attachments[0].fields.find(a => a.title === 'Heroku App')).toEqual({
+          title: 'Heroku App',
+          value: `<https://heroku-app.herokuapp.com | heroku-app>`,
           short: true,
         });
       });
